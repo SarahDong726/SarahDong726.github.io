@@ -470,6 +470,11 @@ body.loaded .hero-wrapper{
 <p id="typing-text" style="font-size:16px; color:#834945; font-family:'Lora', serif; font-weight:400; letter-spacing:0.3px; margin-top:-30px; white-space:nowrap;"></p>
 </div>
 
+<div class="hero-buttons">
+  <a href="resume.pdf" class="btn">Download CV</a>
+  <a href="mailto:你的邮箱" class="btn-outline">Contact Me</a>
+</div>
+
 <div id="hero-images">
   <img class="hero-img img1" src="7.jpeg">
   <img class="hero-img img2" src="9.jpeg">
@@ -499,6 +504,31 @@ body.loaded .hero-wrapper{
   transition: 0.4s;
 
   position: relative;  
+}
+
+ .hero-buttons{
+  display:flex;
+  gap:20px;
+  margin-top:20px;
+  justify-content:center; /* 让按钮居中 */
+}
+
+.btn{
+  padding:10px 22px;
+  background:#343C3C;
+  color:#fff;
+  border-radius:999px;
+  text-decoration:none;
+  font-size:14px;
+}
+
+.btn-outline{
+  padding:10px 22px;
+  border:1px solid #343C3C;
+  color:#343C3C;
+  border-radius:999px;
+  text-decoration:none;
+  font-size:14px;
 }
 
 .img1 {

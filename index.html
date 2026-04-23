@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Bodoni+Moda:wght@400;600&family=EB+Garamond:wght@400;500&family=Montserrat:wght@400;600&family=Noto+Serif+SC:wght@400;600;700&family=Cinzel:wght@400;600&family=Merriweather:wght@400;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shihua Dong | Portfolio</title>
+
+<style>
+body { margin:0; font-family:"Helvetica Neue"; background:#EDEAE3; }
+header {
+ position:fixed;
+ top:20px;
+ right:30px;
+ width:auto;
+ display:flex;
+ justify-content:flex-end;
+ padding:0;
+ z-index:20;
+}
+.menu-btn {
+ width:20px;
+ height:12px;
+ display:flex;
+ flex-direction:column;
+ justify-content:space-between;
+ cursor:pointer;
+ position:relative;
+ z-index:21;
+ background:none;
+ padding:0;
+ border-radius:0;
+ backdrop-filter:none;
+}
+.menu-btn span {
+ height:1px;
+ background:#2E2E2E;
+ border-radius:1px;
+ width:100%;
+}
+section { padding:60px 10%; }
+
+/* ✅ 保留你原hero，但修复偏移 */
+.hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* FIX */
+    align-items: center;
+    text-align: center;
+    padding-top: 120px; /* FIX */
+    gap: 12px; /* tighter spacing */
+}
+.hero-content { max-width:500px; transform:none; }
+#hero-img {
+    width: 260px;
+    margin-top: 20px; /* FIX: closer to text */
+    border-radius: 16px;
+    opacity: 1;
+    transform: none;
+}
+
+/* ❗只修这个关键BUG */
+#about { margin-top:80px; display:flex; justify-content:flex-start; gap:40px; max-width:1000px; margin-left:auto; margin-right:auto;}
+
+/* 左侧文字缩小一号 */
+#about p{
+ font-size:14px;
+ line-height:1.7;
+}
+
+/* ===== Sticky Notes Style ===== */
+.notes {
+ position:relative;
+ width:320px;
+ margin-left:0px; /* 往左收一点 */
+
+ transform:translateX(-90px);
+}
+.note {
+ border-radius:16px;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-family:'EB Garamond';
+ font-size:18px;
+ font-weight:400;
+ color:#000000;
+ box-shadow:0 10px 20px rgba(0,0,0,0.08);
+ position:absolute;
+ transition:0.25s ease;
+ text-align:center;
+ cursor:pointer;
+ padding:10px 14px;
+ white-space:nowrap; /* 不换行 */
+}
+
+/* 不同大小（放大） */
+.note:nth-of-type(1){
+ width:115px;
+ height:115px;
+ background:#7DA0CA;
+ top:-30px;
+ right:2px;
+ transform:rotate(-5deg);
+ z-index:3;
+}
+.note:nth-of-type(2){
+ width:125px;
+ height:125px;
+ background:#727665;
+ top:85px;
+ right:15px;
+ transform:rotate(3deg);
+ z-index:2;
+}
+.note:nth-of-type(3){
+ width:100px;
+ height:100px;
+ background:#E8B478;
+ top:200px;
+ right:-5px;
+ transform:rotate(-3deg);
+ z-index:1;
+}
+
+
+.note:hover{
+ transform:translateY(-6px) scale(1.06) rotate(0deg);
+ box-shadow:0 14px 30px rgba(0,0,0,0.15);
+}
+
+/* ===== Curved dashed arrow (SVG) ===== */
+.arrow-svg{
+ position:absolute;
+ right:140px; /* 再往右一点 */
+ top:90px; /* 往上移 */
+ width:220px;
+ height:130px;
+ overflow:visible;
+}
+.arrow-svg path{
+ fill:none;
+ stroke:#8B5E3C;
+ stroke-width:2;
+ stroke-dasharray:6 6; /* 虚线 */
+}
+
+/* 标题保持 */
+.section-title {
+ font-family:'Montserrat';
+ text-align:center;
+ margin-bottom:72px;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ gap:32px;
+ color:#5C3A21;
+ position:relative;
+ top:6px; /* 让文字稍微往下 */
+}
+.section-title:before,.section-title:after{content:""; width:80px; height:1px; background:#5C3A21;}
+
+/* What I Do 用 Baskerville */
+.whatido-title{
+ font-family:'Baskerville', 'Times New Roman', serif;
+ font-size:28px; /* 再放大两个号 */
+}
+
+/* Modern style for Education title */
+.education-title{
+ font-family:'EB Garamond';
+ font-weight:500;
+ letter-spacing:1px;
+ text-transform:none;
+ font-size:31px; /* 放大五个号 */
+}
+
+/* ===== What I Do 优化风格 ===== */
+.skills-block {
+ display:flex;
+ flex-wrap:wrap;
+ gap:14px 18px;
+ max-width:720px;
+ margin-top:20px;
+}
+
+.skills-block h3{
+ font-size:18px;
+ font-weight:700; /* 加粗小标题 */
+ color:#2E2E2E;
+ margin-bottom:10px;
+ font-family:'Noto Serif SC', 'Songti SC', serif; /* 华康宋体风格 */
+}
+
+.skill-box {
+ font-family:'Noto Serif SC', 'Songti SC', serif; /* 思源宋体 */
+ padding:10px 18px;
+ border-radius:22px;
+ border:1px solid rgba(0,0,0,0.12);
+ font-size:13px;
+ color:#3a3a3a;
+ background:#EDEAE3; /* 用回背景色 */
+ transition:0.25s;
+}
+
+.skill-box:hover{
+ background:#fff;
+ box-shadow:0 4px 10px rgba(0,0,0,0.08);
+ transform:translateY(-2px);
+}
+
+/* ===== Tools Circular Progress ===== */
+.tool{
+ display:flex;
+ align-items:center;
+ gap:18px;
+ margin:14px 0;
+ font-family:'Noto Serif SC', 'Songti SC', serif;
+ color:#2E2E2E;
+}
+
+.tools-grid {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  gap: 40px;
+}
+
+.tools-grid > .tool {
+  display: contents;
+}
+
+.tools-right {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  justify-content: center;
+}
+
+.circle{
+ width:90px;
+ height:90px;
+ border-radius:50%;
+ position:relative;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ font-family:'EB Garamond';
+ font-size:13px;
+ color:#2E2E2E;
+}
+
+/* 圆环（不影响文字） */
+.circle{
+ --percent:0%; /* 初始为0，用于动画 */
+}
+
+.circle::before{
+ content:'';
+ position:absolute;
+ inset:0;
+ border-radius:50%;
+ background:conic-gradient(from 165deg, #834945 var(--percent), rgba(0,0,0,0.08) var(--percent));
+ -webkit-mask: radial-gradient(circle, transparent 58%, black 60%);
+ mask: radial-gradient(circle, transparent 58%, black 60%);
+}
+
+/* 深色进度（只是一段弧，不是扇形） */
+
+
+
+.tool span{
+ font-size:14px;
+}
+
+.percent{
+ font-size:11px;
+ color:#C94C4C;
+ font-family:'Montserrat';
+}
+
+/* ❗关键：恢复你原项目卡片结构 */
+.project-list { display:grid; grid-template-columns: repeat(2,1fr); gap:32px; }
+
+.project-item {
+ border:1px solid rgba(0,0,0,0.15);
+ border-radius:18px;
+ padding:28px;
+ display:flex;
+ flex-direction:column;
+ gap:12px;
+ font-family:'Noto Serif SC', 'Songti SC', serif; /* 全部思源宋体 */
+}
+
+.project-title{
+ font-weight:700; /* 项目名称加粗 */
+ font-size:16px;
+}
+
+.project-role{
+ font-size:13px;
+ margin-top:2px;
+ transform:translateY(2px);
+ color:#555;
+}
+
+.project-time{
+ font-size:12px;
+ margin-top:0px; /* 更靠近 */
+ transform:translateY(-2px); /* 向上平移 */
+ color:#777;
+}
+
+
+.view-btn {
+ margin-top:14px;
+ padding:4px 10px;
+ border:1px solid rgba(0,0,0,0.2);
+ background:transparent;
+ border-radius:6px;
+ font-size:11px;
+ display:inline-flex;
+ align-items:center;
+ gap:4px;
+ width:fit-content;
+ margin-left:0; /* 居左 */
+ margin-right:0;
+ cursor:pointer;
+ transition:0.2s;
+}
+
+
+.view-btn::after{
+ content:'→';
+ font-size:11px;
+}
+
+.view-btn:hover{
+ background:#000;
+ color:#fff;
+ border-color:#000;
+}
+
+.timeline{max-width:900px;} .timeline-item{margin-bottom:40px;}
+.footer{text-align:center; padding:40px; color:#888;}
+
+/* ===== NAV OVERLAY ===== */
+.nav-overlay{
+ position:fixed;
+ top:0;left:0;
+ width:100%;height:100vh;
+ background:#EDEAE3;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ flex-direction:column;
+ gap:28px;
+ opacity:0;
+ pointer-events:none;
+ transition:0.3s;
+ z-index:9;
+}
+.nav-overlay.active{
+ opacity:1;
+ pointer-events:auto;
+}
+.nav-overlay a{
+ font-size:28px;
+ font-family:'Bodoni Moda';
+ color:#2E2E2E;
+ text-decoration:none;
+}
+.nav-overlay a:hover{opacity:0.6;}
+
+
+
+/* 卡片式 intro（类似参考图） */
+.intro-card{
+ width:70%;
+ max-width:900px;
+ border-radius:20px;
+ overflow:hidden;
+ box-shadow:0 20px 40px rgba(0,0,0,0.12);
+ position:relative;
+}
+
+.intro-card img{
+ width:100%;
+ display:block;
+}
+
+.intro-card::after{
+ content:'';
+ position:absolute;
+ top:0;left:0;
+ width:100%;height:100%;
+ background:linear-gradient(to top, rgba(0,0,0,0.25), transparent);
+}
+
+</style>
+
+<style>
+.skill-box {
+  transition: all 0.3s ease;
+}
+
+.skill-box:hover {
+  background: #000;
+  color: #fff;
+  transform: translateY(-2px);
+}
+</style>
+</head>
+
+<body>
+
+<!-- Intro Screen -->
+<div class="intro" id="intro"></div>
+
+<style>
+.intro{
+ position:fixed;
+ top:0;left:0;
+ width:100%;height:100vh;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ z-index:100;
+ background:url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?q=80&w=1920') center/cover no-repeat;
+ transition:opacity 0.8s ease;
+}
+/* subtle dark overlay for depth */
+.intro::after{
+ content:'';
+ position:absolute;
+ inset:0;
+ background:linear-gradient(to top, rgba(0,0,0,0.45), rgba(0,0,0,0.1));
+}
+
+
+
+.intro-media{
+ width:300px; /* 放大方便确认 */
+ height:auto;
+ opacity:1;
+ display:block;
+  /* 调试用：确保能看到 */
+}
+
+body.loaded .intro{
+ opacity:0;
+ pointer-events:none;
+}
+
+.hero-wrapper{
+ transform:translateY(100vh);
+ transition:transform 0.8s ease;
+}
+body.loaded .hero-wrapper{
+ transform:translateY(0);
+}
+</style>
+<header>
+<div class="menu-btn"><span></span><span></span><span></span></div>
+</header>
+
+<!-- NAV MENU -->
+<div class="nav-overlay" id="nav">
+  <a href="#">Home</a>
+  <a href="#about">About Me</a>
+  <a href="#whatido">Skill</a>
+  <a href="#project">Project</a>
+  <a href="#experience">Experience</a>
+  <a href="#education">Education</a>
+</div>
+
+<div class="hero-wrapper">
+<section class="hero">
+<div class="hero-content">
+<p style="font-size:50px; font-family:'Bodoni Moda'; color:#343C3C;">Hello, I am Sarah</p>
+<p id="typing-text" style="font-size:16px; color:#834945; font-family:'Lora', serif; font-weight:400; letter-spacing:0.3px; margin-top:-30px; white-space:nowrap;"></p>
+</div>
+
+<div class="hero-buttons">
+  <a href="Sarah_Dong_CV.pdf" class="btn" target="_blank" rel="noopener noreferrer">Download CV →</a>
+  <a href="#" class="btn-outline" id="contact-btn">Contact Me →</a>
+</div>
+
+<div id="hero-images">
+  <img class="hero-img img1" src="7.jpeg">
+  <img class="hero-img img2" src="9.jpeg">
+  <img class="hero-img img3" src="8.jpeg">
+</div>
+
+<style>
+#hero-images {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  margin-top: 40px;
+
+  opacity: 0;
+  transform: translateY(80px);
+  transition: 0.8s;
+}
+
+.hero-img {
+  width: 180px;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transition: 0.4s;
+
+  position: relative;  
+}
+
+ .hero-buttons{
+  display:flex;
+  gap:20px;
+  margin-top:20px;
+  justify-content:center; /* 让按钮居中 */
+
+  opacity: 0;                 
+  transform: translateY(20px);
+  transition: 0.6s; 
+}
+
+.btn{
+  padding:10px 22px;
+  background: transparent;
+  color:#343C3C;
+  border:1px solid rgba(0,0,0,0.2);
+  border-radius:999px;
+  text-decoration:none;
+  font-size:14px;
+  transition:0.3s;
+}
+
+.btn:hover{
+  background:#000;
+  color:#fff;
+  border-color:#000;
+}
+
+.btn-outline{
+  padding:10px 22px;
+  background: transparent;
+  color: #343C3C;
+  border:1px solid rgba(0,0,0,0.2);
+  border-radius:999px;
+  text-decoration:none;
+  font-size:14px;
+  transition:0.3s;
+}
+
+.btn-outline:hover{
+  background:#000;
+  color:#fff;
+  border-color:#000;
+}
+
+.img1 {
+  transform: rotate(-6deg) translateX(20px);
+}
+
+.img2 {
+  transform: scale(1.05) rotate(2deg);  
+  object-position: center 30%;          
+  z-index: 2;
+}
+
+.img3 {
+  transform: rotate(-3deg) translateX(-20px);
+}
+
+.hero-img:hover {
+  transform: scale(1.08) rotate(0deg);
+  z-index: 10;
+}
+</style>
+
+</section>
+</div>
+
+<section id="about" style="margin-top:80px; display:flex; justify-content:space-between; align-items:flex-start; gap:40px; position:relative;">
+    <div style="max-width:600px;">
+        <h2 style="font-family:'Montserrat', sans-serif; color:#5C3A21;">About Me</h2>
+        <p>信息技术硕士，具备产品分析、业务分析与数据分析复合背景。参与多个系统开发与数据分析项目，具备从需求分析、产品设计到项目推进的完整经验。</p>
+        <p>熟悉用户需求拆解、用户故事（User Story）、用例图（Use Case）、流程设计等产品方法论，能够基于用户视角进行功能设计与优化。</p>
+        <p>具备数据分析能力，能够使用 Python 进行数据预处理，结合 Tableau 进行数据可视化与洞察输出，支持业务决策。</p>
+        <p>具备良好的跨团队沟通能力，能够协调技术与业务团队推进项目落地。</p>
+    </div>
+
+    <div class="notes">
+        <!-- Curved dashed arrow -->
+        <svg class="arrow-svg" viewBox="0 0 200 120">
+          <defs>
+            <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+              <polygon points="0 0, 6 3, 0 6" fill="#8B5E3C" />
+            </marker>
+          </defs>
+          <!-- 从右往左弯曲 -->
+          <!-- 更短+不穿过文字 + 带一个小弯结 -->
+          <!-- 指向“流程右侧” + 带一个小结 -->
+          <path d="M200,30 C150,60 120,70 60,65" marker-end="url(#arrowhead)" />
+        </svg>
+        <div class="note">Product Manager</div>
+        <div class="note">Business Analyst</div>
+        <div class="note">Data Analyst</div>
+    </div>
+</section>
+
+<section id="whatido" style="margin-top:40px;">
+    <h2 class="section-title whatido-title">What I Do</h2>
+    
+    <!-- 数据分析与建模 -->
+    <div class="skills-block" style="margin-top:60px;">
+        <h3 style="width:100%; font-size:16px;">数据分析与建模</h3>
+        <div class="skill-box">SQL数据提取与分析</div>
+        <div class="skill-box">Python数据处理（Pandas）与文本分析</div>
+        <div class="skill-box">数据清洗与数据建模</div>
+        <div class="skill-box">数据可视化（Tableau / Power BI）</div>
+    </div>
+
+    <!-- 产品与业务能力 -->
+    <div class="skills-block" style="margin-top:40px;">
+        <h3 style="width:100%; font-size:16px;">产品与业务能力</h3>
+        <div class="skill-box">用户行为分析与转化路径拆解</div>
+        <div class="skill-box">数据驱动产品优化（Data → Product）</div>
+        <div class="skill-box">产品需求分析（PRD）与功能设计</div>
+        <div class="skill-box">用户调研与竞品分析</div>
+    </div>
+
+    <!-- 通用能力 -->
+    <div class="skills-block" style="margin-top:40px;">
+        <h3 style="width:100%; font-size:16px;">通用能力</h3>
+        <div class="skill-box">逻辑分析与问题拆解</div>
+        <div class="skill-box">数据驱动决策</div>
+        <div class="skill-box">跨团队沟通与项目推进</div>
+    </div>
+
+    <!-- 工具与技术 -->
+    <div class="skills-block" style="margin-top:24px; max-width:720px; display:grid; grid-template-columns:repeat(4,1fr); gap:30px 40px;">
+        <h3 style="grid-column:1/-1; width:100%; font-size:16px;">工具与技术</h3>
+
+        <div class="tool"><div class="circle" data-percent="75">MySQL</div></div>
+        <div class="tool"><div class="circle" data-percent="75">Python</div></div>
+        <div class="tool"><div class="circle" data-percent="80">Tableau</div></div>
+        <div class="tool"><div class="circle" data-percent="70">Power BI</div></div>
+        <div class="tool"><div class="circle" data-percent="85">Neo4j</div></div>
+        <div class="tool"><div class="circle" data-percent="90">Jira</div></div>
+        <div class="tool"><div class="circle" data-percent="75">HTML</div></div>
+        <div class="tool"><div class="circle" data-percent="80">Figma</div></div>
+       
+    </div>
+</section>
+
+<section id="project">
+<h2 class="section-title whatido-title">What I've Built</h2>
+<div class="project-list">
+        <!-- 1 -->
+        <div class="project-item">
+            <div class="project-title">🏋️ 健身房课程预约系统</div>
+            <div class="project-role">项目经理 & 产品需求分析</div>
+            <div class="project-time">2025.03 – 2025.06</div>
+
+            <button class="view-btn">View Project</button>
+
+        </div> 
+
+        <!-- 2 -->
+        <div class="project-item">
+            <div class="project-title">🎒 Trailnet 户外活动平台开发</div>
+            <div class="project-role">业务分析师 & 产品负责人</div>
+            <div class="project-time">2024.03 – 2024.11</div>
+            <button class="view-btn">View Project</button>
+        </div>
+
+        <!-- 3 -->
+        <div class="project-item">
+            <div class="project-title">🧠 患者健康与营养追踪系统</div>
+            <div class="project-role">数据分析师（图数据库方向）</div>
+            <div class="project-time">2024.07 – 2024.11</div>
+            <button class="view-btn">View Project</button>
+        </div>
+
+        <!-- 4 -->
+        <div class="project-item">
+            <div class="project-title">📊 东京奥运会推文数据分析</div>
+            <div class="project-role">数据分析师 & 数据可视化工程师</div>
+            <div class="project-time">2024.07 – 2024.10</div>
+            <button class="view-btn">View Project</button>
+        </div>
+    </div>
+
+    <style>
+    .view-btn {
+      font-family: 'Lora', serif;
+      letter-spacing: 0.5px;
+      font-size: 14px;
+    }
+</style>
+
+
+</section>
+
+<section id="experience" style="margin-top:80px;">
+    <h2 class="section-title whatido-title">Experience</h2>
+
+    <div class="timeline" style="margin-top:60px;">
+
+        <div class="timeline-item">
+            <div>
+                <h3 style="margin:0 0 6px 0; font-family:'Noto Serif SC','Songti SC',serif; font-weight:800; font-size:16px; color:#2E2E2E;">Woolworths</h3>
+                <div style="font-size:13px; color:#777; margin-bottom:10px; font-family:'Noto Serif SC','Songti SC',serif;">Sales Attendant</div>
+                <ul style="padding-left:20px; color:#555; font-size:14px; line-height:1.9; font-family:'Noto Serif SC','Songti SC',serif;">
+                    <li>在前台（Front Desk）提供客户服务，处理顾客咨询、退款及问题反馈</li>
+                    <li>处理线上订单拣货（Online Order Picking），保证高准确率</li>
+                    <li>在快节奏环境下多任务处理，保证运营效率</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="timeline-item">
+            <div>
+                <h3 style="margin:0 0 6px 0; font-family:'Noto Serif SC','Songti SC',serif; font-weight:800; font-size:16px; color:#2E2E2E;">UMCG广告公司</h3>
+                <div style="font-size:13px; color:#777; margin-bottom:10px; font-family:'Noto Serif SC','Songti SC',serif;">运营</div>
+                <ul style="padding-left:20px; color:#555; font-size:14px; line-height:1.9; font-family:'Noto Serif SC','Songti SC',serif;">
+                    <li>基于用户行为数据分析内容表现，识别用户偏好与趋势</li>
+                    <li>参与内容策略制定，优化方向提升用户参与度</li>
+                    <li>跟踪关键指标，支持效果评估与优化</li>
+                    <li>与设计及运营团队协作，确保内容符合品牌与用户需求</li>
+                </ul>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<section id="education" style="margin-top:80px;">
+    <h2 class="section-title whatido-title">What I’ve Learned</h2>
+
+    <div style="max-width:900px; margin-top:60px;">
+        <!-- UOW -->
+        <div style="margin-bottom:32px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div>
+                    <div style="font-family:'Noto Serif SC','Songti SC',serif; font-weight:800; font-size:16px; color:#2E2E2E;">University of Wollongong</div>
+                    <div style="font-size:13px; color:#777; margin-top:6px; font-family:'Noto Serif SC','Songti SC',serif;">信息技术硕士（澳大利亚）</div>
+                </div>
+                <div style="font-size:12px; color:#777; font-family:'Noto Serif SC','Songti SC',serif;">2023.02 - 2025.07</div>
+            </div>
+
+            <ul style="padding-left:20px; margin-top:12px; color:#555; font-size:14px; line-height:1.9; font-family:'Noto Serif SC','Songti SC',serif;">
+                <li>数据库管理系统、系统分析与项目管理、程序设计、网页开发、大数据管理</li>
+            </ul>
+        </div>
+
+        <div style="height:1px; background:rgba(0,0,0,0.2); margin:40px 0;"></div>
+
+        <!-- 华商 -->
+        <div>
+            <div style="display:flex; justify-content:space-between; align-items:flex-start;">
+                <div>
+                    <div style="font-family:'Noto Serif SC','Songti SC',serif; font-weight:800; font-size:16px; color:#2E2E2E;">广州华商学院</div>
+                    <div style="font-size:13px; color:#777; margin-top:6px; font-family:'Noto Serif SC','Songti SC',serif;">新闻学学士</div>
+                </div>
+                <div style="font-size:12px; color:#777; font-family:'Noto Serif SC','Songti SC',serif;">2013.09 - 2017.07</div>
+            </div>
+
+            <ul style="padding-left:20px; margin-top:12px; color:#555; font-size:14px; line-height:1.9; font-family:'Noto Serif SC','Songti SC',serif;">
+                <li>视频剪辑、广告学与品牌传播、新闻采访、内容策划与运营</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<div class="footer">© 2026 Shihua Dong</div>
+
+<script>
+
+
+// cursor blink
+const style = document.createElement('style');
+style.innerHTML = `
+.cursor {
+  margin-left:4px;
+  animation: blink 1s infinite;
+}
+@keyframes blink {
+  0%,100%{opacity:1}
+  50%{opacity:0}
+}`;
+document.head.appendChild(style);
+
+
+// ===== PARTICLE SYSTEM =====
+
+const text = "Making sense of data, building things that matter.";
+const el = document.getElementById("typing-text");
+let i = 0;
+
+function type() {
+  if (i <= text.length) {
+    el.innerHTML = text.slice(0, i) + '<span class="cursor">|</span>';
+    i++;
+    setTimeout(type, 60);
+  } else {
+
+    const btns = document.querySelector('.hero-buttons');
+    btns.style.opacity = '1';
+    btns.style.transform = 'translateY(0)';
+
+    setTimeout(() => {
+      document.querySelector('.hero').style.transform = 'translateY(-60px)';
+      document.querySelector('.hero').style.transition = '0.8s';
+
+      const imgs = document.getElementById('hero-images');
+      imgs.style.opacity = '1';
+      imgs.style.transform = 'translateY(0)';
+    }, 600);
+
+  }
+}
+
+el.innerHTML = '';
+setTimeout(type, 500);
+
+
+// ===== INTRO ANIMATION =====
+setTimeout(()=>{
+  document.body.classList.add('loaded');
+},1500);
+
+// ===== CIRCLE ANIMATION ON SCROLL =====
+const circles = document.querySelectorAll('.circle');
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      const el = entry.target;
+      const target = parseInt(el.getAttribute('data-percent'));
+      let current = 0;
+
+      const animate = () => {
+        if(current <= target){
+          el.style.setProperty('--percent', current + '%');
+          current += 2; // 加快速度（每帧增长2%）
+          requestAnimationFrame(animate);
+        }
+      };
+
+      animate();
+      observer.unobserve(el);
+    }
+  });
+}, { threshold: 0.4 });
+
+circles.forEach(c => observer.observe(c));
+
+// ===== MENU TOGGLE =====
+const menuBtn = document.querySelector('.menu-btn');
+const nav = document.getElementById('nav');
+
+menuBtn.addEventListener('click',()=>{
+  nav.classList.toggle('active');
+});
+
+// 点击链接自动关闭
+nav.querySelectorAll('a').forEach(link=>{
+  link.addEventListener('click',()=>{
+    nav.classList.remove('active');
+  });
+});
+
+// ===== CONTACT MODAL =====
+window.addEventListener('DOMContentLoaded', () => {
+
+const contactBtn = document.getElementById('contact-btn');
+const contactModal = document.getElementById('contact-modal');
+
+contactBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  contactModal.style.display = 'flex';
+});
+
+// 点击背景关闭
+contactModal.addEventListener('click', () => {
+  contactModal.style.display = 'none';
+});
+
+// 点击内容不关闭
+contactModal.querySelector('div').addEventListener('click', (e) => {
+  e.stopPropagation();
+});
+
+});
+
+</script>
+
+
+
+<!-- Project Modal -->
+<div id="project-modal" style="position:fixed; inset:0; background:rgba(0,0,0,0.2); backdrop-filter:blur(8px); display:none; align-items:center; justify-content:center; z-index:50;">
+  <div style="background:#EDEAE3; padding:36px; border-radius:16px; width:60%; max-width:650px; text-align:left; font-family:'Noto Serif SC','Songti SC',serif; box-shadow:0 20px 50px rgba(0,0,0,0.15);">
+    <h3 id="modal-title" style="margin-top:0;"></h3>
+    <ul id="modal-content" style="color:#555; font-size:14px; line-height:1.9; text-align:left; padding-left:20px; margin:0;"></ul>
+
+    <!-- Picture Placeholder -->
+    <div id="modal-images" style="margin-top:20px; display:flex; flex-wrap:wrap; justify-content:center; gap:4px;"></div>
+
+    <button onclick="closeModal()" style="margin-top:20px;">Close</button>
+  </div>
+</div>
+
+<script>
+
+// ===== VIEW PROJECT CLICK =====
+document.querySelectorAll('.view-btn').forEach((btn,index)=>{    
+  // ⭐ 关键：跳过外链
+  if(btn.classList.contains('external-link')) return;
+
+  btn.addEventListener('click',()=>{
+    
+    const titles = [
+      '健身房课程预约系统',
+      'Trailnet 户外平台',
+      '健康与营养追踪系统',
+      '东京奥运会数据分析'
+    ];
+
+    const images = [
+      ["WechatIMG24.jpeg","WechatIMG25.jpeg","WechatIMG26.jpeg"],
+      ["1.png","2.png","3.png"],
+      ["4.png","5.png","6.png"],
+      []
+    ];
+
+
+
+    const contents = [
+`• 网址: <a href="https://booking-app-zeta-topaz.vercel.app/" target="_blank">booking-app-zeta-topaz.vercel.app</a>
+• 参与设计健身课程预约系统，实现课程管理、用户预约及时间调度功能
+• 负责需求分析与结构化表达，输出 User Story、Use Case、业务流程图及系统图
+• 协助项目推进，参与任务拆解与进度跟踪，支持团队按计划完成各阶段开发任务
+• 使用 Jira + Taiga 进行任务管理，跟踪功能开发状态并协调团队沟通`,
+
+`• 网址: <a href="https://trailnet.onrender.com/loginpage" target="_blank">https://trailnet.onrender.com/loginpage</a>
+• 面向户外运动爱好者（骑行、跑步、徒步等）设计平台，解决用户难以匹配活动伙伴、组织效率低的问题
+• 主导核心功能设计，包括活动发布与参与机制、用户内容分享（图片/视频/评论）及互动体系
+• 负责需求拆解与文档输出，包括 User Story、Use Case、业务流程图等
+• 使用 Jira 进行敏捷项目管理，跟踪 Sprint 进度并推动功能按期交付
+• 协调开发团队与需求方，确保产品实现与业务目标一致`,
+
+`• 基于图数据库 Neo4j 构建患者健康管理系统的数据模型，梳理不同角色（患者、医生、护士及营养师）之间的复杂关系
+• 参与设计实体关系结构（Entity-Relationship），将多角色交互场景转化为节点与关系，提高数据表达能力
+• 编写基础查询语句（Cypher），支持患者信息查询及关系分析需求
+• 支持系统中营养评估与患者管理相关的数据逻辑设计`,
+
+`• 基于公开数据集（Google Dataset + Kaggle）收集东京奥运相关 Twitter 数据，并进行数据整理与基础清洗
+• 参与数据预处理工作，包括数据筛选、结构整理及异常值处理，提高数据可用性
+• 负责数据可视化与结果呈现，使用 Tableau 构建仪表盘，展示用户情绪趋势与热点话题分布
+• 将分析结果转化为直观图表（如情绪变化趋势、关键词分布等），支持团队进行数据洞察输出
+• 参与项目整体推进与协调，跟踪任务进度，确保数据分析与可视化按时交付`
+];
+
+    document.getElementById('modal-title').innerText = titles[index];
+    let currentImages = images[index];
+    let current = 0;
+
+    const container = document.getElementById('modal-images');
+    container.innerHTML = '';
+
+    currentImages.forEach((img,i) => {
+      const image = document.createElement('img');
+
+      image.style.transition = '0.3s';
+      image.style.cursor = 'pointer';
+
+      image.onmouseover = () => {
+        image.style.transform = 'scale(1.05)';
+      };
+
+      image.onmouseout = () => {
+        image.style.transform = 'scale(1)';
+      };
+
+      image.onclick = () => {
+        document.getElementById('lightbox').style.display = 'flex';
+        document.getElementById('lightbox-img').src = img;
+      };
+
+      image.src = img;
+
+      image.style.width = '32%';
+      image.style.height = 'auto';
+      image.style.borderRadius = '10px';
+      image.style.objectFit = 'contain';
+   
+      
+      container.appendChild(image);
+    });
+    
+    const list = document.getElementById('modal-content');
+    list.innerHTML = '';
+    contents[index].split('\n').forEach(line => {
+      const li = document.createElement('li');
+      li.innerHTML = line.replace(/^•\s*/, '');
+      li.style.marginBottom = '6px';
+      list.appendChild(li);
+    });
+    document.getElementById('project-modal').style.display = 'flex';
+  });
+});
+
+function closeModal(){
+  document.getElementById('project-modal').style.display='none';
+}
+
+window.onload = () => {
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+
+  lightbox.onclick = () => {
+    lightbox.style.display = 'none';
+  };
+
+  lightboxImg.onclick = (e) => {
+    e.stopPropagation();
+  };
+};
+
+let current = 0;
+let currentImages = [];
+
+</script>
+
+
+
+<div id="lightbox" style="
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.8);
+  justify-content:center;
+  align-items:center;
+  z-index:999;
+">
+  <img id="lightbox-img" style="
+    max-width:90%;
+    max-height:90%;
+    border-radius:10px;
+  ">
+</div>
+
+<div id="contact-modal" style="
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.2);
+  backdrop-filter:blur(8px);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+">
+  <div style="
+    background:#EDEAE3;
+    padding:40px;
+    border-radius:18px;
+    width:420px;
+    max-width:90%;
+    font-family:'Noto Serif SC','Songti SC',serif;
+    box-shadow:0 20px 50px rgba(0,0,0,0.15);
+  ">
+    <h2 style="margin-top:0; font-size:22px; font-weight:700;">
+      Contact Me
+    </h2>
+
+    <p><strong>📨 Email:</strong> dongshihua726@163.com</p>
+    <p><strong>☎️ Phone:</strong> 13427664800</p>
+    <p>
+      <strong>💡 LinkedIn:</strong><br>
+      <a href="https://www.linkedin.com/in/sarah-dong-043595342" target="_blank">
+        www.linkedin.com/in/sarah-dong-043595342
+      </a>
+    </p>
+
+  </div>
+</div>
+
+</body>
+</html>
